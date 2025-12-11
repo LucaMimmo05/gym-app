@@ -1,88 +1,175 @@
+/* ===== CARD ESERCIZIO ===== */
+
 .exercise-card {
-  background: linear-gradient(135deg, #ffff00 0%, #00ffff 100%);
-  border: 5px ridge #ff00ff;
-  margin: 20px 0;
-  padding: 20px;
-  box-shadow: 8px 8px 0px #000000;
+  background: linear-gradient(145deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 20px;
+  padding: 28px;
   position: relative;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  margin-bottom: 20px;
 }
 
 .exercise-card::before {
-  content: '🌟';
+  content: '';
   position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 30px;
-  animation: rotate 3s linear infinite;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96c93d);
+  background-size: 300% 100%;
+  animation: gradientMove 4s ease infinite;
+  opacity: 0.8;
 }
 
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+@keyframes gradientMove {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
+.exercise-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(78, 205, 196, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Titolo esercizio */
 .exercise-card h2 {
-  color: #0000ff;
-  font-size: 24px;
-  text-shadow: 2px 2px #ffffff;
-  margin-top: 0;
-  text-transform: uppercase;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  background: linear-gradient(135deg, #fff 0%, #a8dadc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
+/* Singola info */
 .exercise-card p {
-  color: #000000;
-  font-size: 16px;
-  margin: 8px 0;
-  font-weight: bold;
+  margin: 0 0 12px 0;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+  transition: all 0.3s ease;
+}
+
+.exercise-card p:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(78, 205, 196, 0.2);
 }
 
 .exercise-card strong {
-  color: #ff0000;
+  color: #4ecdc4;
+  font-weight: 600;
 }
 
+/* Gruppo bottoni */
 .button-group {
   display: flex;
-  gap: 15px;
-  justify-content: center;
+  gap: 12px;
   margin-top: 20px;
 }
 
+/* Stile base bottoni */
 .btn-edit,
 .btn-delete {
-  font-size: 16px;
-  font-weight: bold;
-  padding: 10px 20px;
-  border: 4px outset #ffffff;
-  cursor: pointer;
-  font-family: 'Comic Sans MS', cursive;
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 20px;
+  font-size: 13px;
+  font-weight: 600;
   text-transform: uppercase;
-  box-shadow: 4px 4px 0px #000000;
-  transition: all 0.2s;
+  letter-spacing: 0.8px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
 }
 
+.btn-edit::before,
+.btn-delete::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-edit:hover::before,
+.btn-delete:hover::before {
+  left: 100%;
+}
+
+/* Bottone Modifica */
 .btn-edit {
-  background: #00ff00;
-  color: #000000;
+  background: linear-gradient(135deg, #4ecdc4 0%, #45b7d1 100%);
+  color: #1a1a2e;
+  box-shadow: 0 4px 15px rgba(78, 205, 196, 0.25);
 }
 
 .btn-edit:hover {
-  background: #00cc00;
-  transform: scale(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4);
 }
 
+.btn-edit:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Bottone Elimina */
 .btn-delete {
-  background: #ff0000;
-  color: #ffffff;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a5a 100%);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.25);
 }
 
 .btn-delete:hover {
-  background: #cc0000;
-  transform: scale(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
 }
 
-.btn-edit:active,
 .btn-delete:active {
-  border-style: inset;
-  transform: translateY(2px);
-  box-shadow: 2px 2px 0px #000000;
+  transform: translateY(0) scale(0.98);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .exercise-card {
+    padding: 20px;
+  }
+
+  .exercise-card h2 {
+    font-size: 18px;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    width: 100%;
+  }
 }
