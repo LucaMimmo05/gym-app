@@ -4,11 +4,12 @@ import { Exercise } from './models/exercise';
 import { Modal } from './components/modal/modal';
 import { ExerciseService } from './service/exercise-service';
 import { Exercise as ex } from './components/exercise/exercise';
+import { Dropdown } from './components/dropdown/dropdown';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Modal, ex],
+  imports: [RouterOutlet, Modal, ex, Dropdown],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
@@ -64,5 +65,27 @@ export class App {
 
     await this.exerciseService.deleteExercise(id);
     this.exercises = this.exercises.filter((ex) => ex.id !== id);
+  }
+
+  onOptionSelected(option: string) {
+    switch(option) {
+        case 'petto':
+            this.exercises = this.exercises.filter(ex => ex.muscleGroup.toLocaleLowerCase() === 'petto');
+            break;
+        case 'spalle':
+            this.exercises = this.exercises.filter(ex => ex.muscleGroup.toLocaleLowerCase() === 'spalle');
+            break;
+        case 'gambe':
+            this.exercises = this.exercises.filter(ex => ex.muscleGroup.toLocaleLowerCase() === 'gambe');
+            break;
+        case 'braccia':
+            this.exercises = this.exercises.filter(ex => ex.muscleGroup.toLocaleLowerCase() === 'braccia');
+            break;
+        case 'core':
+            this.exercises = this.exercises.filter(ex => ex.muscleGroup.toLocaleLowerCase() === 'core');
+            break;
+        default:
+            this.ngOnInit();
+    }
   }
 }

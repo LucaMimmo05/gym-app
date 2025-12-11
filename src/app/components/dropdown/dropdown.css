@@ -1,0 +1,133 @@
+/* ===== DROPDOWN FILTRO ===== */
+
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 200px;
+}
+
+/* Bottone principale */
+.dropdown-button {
+  width: 100%;
+  padding: 11px 13px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: #d0d0d0;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.dropdown-button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.dropdown-button:focus {
+  outline: none;
+  border-color: #5a9a96;
+  background: rgba(90, 154, 150, 0.06);
+}
+
+/* Label */
+.dropdown-label {
+  flex: 1;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Icona freccia */
+.dropdown-icon {
+  width: 16px;
+  height: 16px;
+  color: rgba(255, 255, 255, 0.4);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.dropdown-icon.open {
+  transform: rotate(180deg);
+}
+
+/* Menu a tendina */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #1a1a22;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  z-index: 998;
+  overflow: hidden;
+  animation: dropdownSlide 0.15s ease;
+}
+
+@keyframes dropdownSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Item nel menu */
+.dropdown-item {
+  width: 100%;
+  padding: 9px 12px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  border-left: 3px solid transparent;
+}
+
+.dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: #e8e8e8;
+}
+
+.dropdown-item:active {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Item selezionato */
+.dropdown-item.selected {
+  background: rgba(90, 154, 150, 0.1);
+  color: #7eb8b4;
+  border-left-color: #5a9a96;
+  font-weight: 500;
+}
+
+.dropdown-item.selected:hover {
+  background: rgba(90, 154, 150, 0.15);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .dropdown-button {
+    padding: 10px 11px;
+    font-size: 12px;
+  }
+
+  .dropdown-item {
+    padding: 8px 11px;
+    font-size: 11px;
+  }
+}

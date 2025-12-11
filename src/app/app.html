@@ -3,11 +3,17 @@
         <h1>Gym Tracker</h1>
         <p class="subtitle">🏋️ Il tuo programma di allenamento personale</p>
 
-        <div class="button-container">
-            <button class="btn-insert" (click)="insertExercise()">
-                + Nuovo Esercizio
-            </button>
+        <div class="filter-section">
+            <app-dropdown label="Filtra per" [options]="['petto', 'spalle', 'gambe', 'braccia', 'core']"
+                (selectionChange)="onOptionSelected($event)">
+            </app-dropdown>
+            <div class="button-container">
+                <button class="btn-insert" (click)="insertExercise()">
+                    + 
+                </button>
+            </div>
         </div>
+
 
         @if (showModal) {
         <app-modal [isEditMode]="isEditMode" (close)="showModal = false"

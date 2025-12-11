@@ -7,10 +7,10 @@
 }
 
 body {
-  background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+  background: #121218;
   min-height: 100vh;
   font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-  color: #fff;
+  color: #e8e8e8;
   line-height: 1.6;
 }
 
@@ -20,20 +20,20 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #4ecdc4 0%, #45b7d1 100%);
+  background: #3a3a4a;
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #45b7d1 0%, #4ecdc4 100%);
+  background: #4a4a5a;
 }
 
 /* Selezione testo */
 ::selection {
-  background: rgba(78, 205, 196, 0.3);
+  background: rgba(100, 120, 140, 0.3);
   color: #fff;
 }
