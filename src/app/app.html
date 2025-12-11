@@ -1,23 +1,25 @@
 <main class="main">
-  <div class="content">
-    <h1>💪 PALESTRA ONLINE - Elenco Esercizi 💪</h1>
-    <marquee behavior="scroll" direction="left">🏋️ Benvenuto nel tuo programma di allenamento! 🏋️</marquee>
-    
-    <div class="button-container">
-      <button class="btn-insert" (click)="insertExercise()">
-        ➕ INSERISCI NUOVO ESERCIZIO
-      </button>
-    </div>
+    <div class="content">
+        <h1>💪 PALESTRA ONLINE - Elenco Esercizi 💪</h1>
+        <marquee behavior="scroll" direction="left">🏋️ Benvenuto nel tuo programma di allenamento! 🏋️</marquee>
 
-    @if (showModal) {
-        <app-modal [isEditMode]="isEditMode" (close)="showModal = false"   [exercise]="selectedExercise"
-></app-modal>
+        <div class="button-container">
+            <button class="btn-insert" (click)="insertExercise()">
+                ➕ INSERISCI NUOVO ESERCIZIO
+            </button>
+        </div>
+
+        @if (showModal) {
+        <app-modal [isEditMode]="isEditMode" (close)="showModal = false"
+            (submitExercise)="isEditMode ? updateExercise($event) : addExercise($event)"
+            [exercise]="selectedExercise"></app-modal>
         }
 
-    <!-- @for (item of exercises; track item.id) {
-        <app-exercise [item]="item" (editExercise)="editExercise()" (deleteExercise)="deleteExercise()"></app-exercise>
-    } -->
-  </div>
+        @for (item of exercises; track item.id) {
+        <app-exercise [exercise]="item" (editExercise)="editExercise($event)"
+            (deleteExercise)="deleteExercise($event)"></app-exercise>
+        }
+    </div>
 </main>
 
 <router-outlet />

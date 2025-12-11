@@ -27,12 +27,32 @@
   border-radius: 20px;
   width: 90%;
   max-width: 450px;
+  max-height: 90vh;
+  overflow-y: auto;
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   color: white;
   position: relative;
-  overflow: hidden;
+}
+
+/* Scrollbar personalizzata */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: rgba(78, 205, 196, 0.4);
+  border-radius: 4px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(78, 205, 196, 0.6);
 }
 
 .modal-content::before {
@@ -206,6 +226,71 @@ button[type='submit']:active {
   transform: translateY(0) scale(0.98);
 }
 
+/* Input invalidi */
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border-color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+}
+
+input.ng-invalid.ng-touched:focus,
+textarea.ng-invalid.ng-touched:focus {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 4px rgba(255, 107, 107, 0.15);
+}
+
+/* Input validi */
+input.ng-valid.ng-touched,
+textarea.ng-valid.ng-touched {
+  border-color: #4ecdc4;
+}
+
+/* Messaggi di errore */
+.error {
+  color: #ff6b6b;
+  font-size: 12px;
+  margin-top: 6px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  animation: errorFadeIn 0.3s ease;
+}
+
+.error::before {
+  content: '⚠';
+  font-size: 14px;
+}
+
+@keyframes errorFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Bottone disabilitato */
+button[type='submit']:disabled {
+  background: linear-gradient(135deg, #555 0%, #444 100%);
+  color: #888;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+button[type='submit']:disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+button[type='submit']:disabled::before {
+  display: none;
+}
+
 /* Responsive */
 @media (max-width: 480px) {
   .modal-content {
@@ -222,4 +307,15 @@ button[type='submit']:active {
   textarea {
     padding: 12px 14px;
   }
+}
+
+.error {
+  color: #ff6b6b;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border-color: #ff6b6b !important;
 }

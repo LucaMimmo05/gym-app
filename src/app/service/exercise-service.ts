@@ -18,4 +18,12 @@ export class ExerciseService {
     async addExercise(exercise: Exercise): Promise<Exercise> {
         return await firstValueFrom(this.http.post<Exercise>(`${this.apiUrl}`, exercise));
     }
+
+    async updateExercise( exercise: Exercise): Promise<Exercise> {
+        return await firstValueFrom(this.http.put<Exercise>(`${this.apiUrl}/${exercise.id}`, exercise));
+    }
+
+    async deleteExercise(id: string): Promise<void> {
+        await firstValueFrom(this.http.delete<void>(`${this.apiUrl}/${id}`));
+    }
 }

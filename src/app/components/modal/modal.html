@@ -1,104 +1,97 @@
 <div class="modal">
-  <div class="modal-content">
-    <span class="close" (click)="closeModal()">&times;</span>
+    <div class="modal-content">
+        <span class="close" (click)="closeModal()">&times;</span>
 
-    <h2>{{ isEditMode ? 'Modifica Esercizio' : 'Inserisci Nuovo Esercizio' }}</h2>
+        <h2>@if (isEditMode) { Modifica Esercizio } @else { Inserisci Nuovo Esercizio }</h2>
 
-    <form (ngSubmit)="onSubmit(exerciseForm)" #exerciseForm="ngForm">
+        <form (ngSubmit)="onSubmit(exerciseForm)" #exerciseForm="ngForm">
 
-      <label for="name">Nome Esercizio:</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        [(ngModel)]="exercise.name"
-        required
-        minlength="2"
-        #nameRef="ngModel"
-      />
-      <div class="error" *ngIf="nameRef.invalid && nameRef.touched">
-        <span *ngIf="nameRef.errors?.['required']">Il nome è obbligatorio.</span>
-        <span *ngIf="nameRef.errors?.['minlength']">Minimo 2 caratteri.</span>
-      </div>
+            <!-- NAME -->
+            <label for="name">Nome Esercizio:*</label>
+            <input type="text" id="name" name="name" [(ngModel)]="exercise.name" required minlength="2"
+                #nameRef="ngModel" />
+            @if (nameRef.invalid && nameRef.touched) {
+            <div class="error">
+                @if (nameRef.errors?.['required']) {
+                <span>Il nome è obbligatorio.</span>
+                }
+                @if (nameRef.errors?.['minlength']) {
+                <span>Minimo 2 caratteri.</span>
+                }
+            </div>
+            }
 
-      <label for="muscleGroup">Gruppo Muscolare:</label>
-      <input
-        type="text"
-        id="muscleGroup"
-        name="muscleGroup"
-        [(ngModel)]="exercise.muscleGroup"
-        required
-        minlength="2"
-        #muscleRef="ngModel"
-      />
-      <div class="error" *ngIf="muscleRef.invalid && muscleRef.touched">
-        <span *ngIf="muscleRef.errors?.['required']">Campo obbligatorio.</span>
-      </div>
+            <!-- MUSCLE GROUP -->
+            <label for="muscleGroup">Gruppo Muscolare:*</label>
+            <input type="text" id="muscleGroup" name="muscleGroup" [(ngModel)]="exercise.muscleGroup" required
+                minlength="2" #muscleRef="ngModel" />
+            @if (muscleRef.invalid && muscleRef.touched) {
+            <div class="error">
+                @if (muscleRef.errors?.['required']) {
+                <span>Campo obbligatorio.</span>
+                }
+            </div>
+            }
 
-      <label for="sets">Serie:</label>
-      <input
-        type="number"
-        id="sets"
-        name="sets"
-        [(ngModel)]="exercise.sets"
-        required
-        min="1"
-        #setsRef="ngModel"
-      />
-      <div class="error" *ngIf="setsRef.invalid && setsRef.touched">
-        <span *ngIf="setsRef.errors?.['required']">Campo obbligatorio.</span>
-        <span *ngIf="setsRef.errors?.['min']">Minimo 1 serie.</span>
-      </div>
+            <!-- SETS -->
+            <label for="sets">Serie:*</label>
+            <input type="number" id="sets" name="sets" [(ngModel)]="exercise.sets" required min="1"
+                #setsRef="ngModel" />
+            @if (setsRef.invalid && setsRef.touched) {
+            <div class="error">
+                @if (setsRef.errors?.['required']) {
+                <span>Campo obbligatorio.</span>
+                }
+                @if (setsRef.errors?.['min']) {
+                <span>Minimo 1 serie.</span>
+                }
+            </div>
+            }
 
-      <!-- REPS -->
-      <label for="reps">Ripetizioni:</label>
-      <input
-        type="number"
-        id="reps"
-        name="reps"
-        [(ngModel)]="exercise.reps"
-        required
-        min="1"
-        #repsRef="ngModel"
-      />
-      <div class="error" *ngIf="repsRef.invalid && repsRef.touched">
-        <span *ngIf="repsRef.errors?.['required']">Campo obbligatorio.</span>
-        <span *ngIf="repsRef.errors?.['min']">Minimo 1 ripetizione.</span>
-      </div>
+            <!-- REPS -->
+            <label for="reps">Ripetizioni:*</label>
+            <input type="number" id="reps" name="reps" [(ngModel)]="exercise.reps" required min="1"
+                #repsRef="ngModel" />
+            @if (repsRef.invalid && repsRef.touched) {
+            <div class="error">
+                @if (repsRef.errors?.['required']) {
+                <span>Campo obbligatorio.</span>
+                }
+                @if (repsRef.errors?.['min']) {
+                <span>Minimo 1 ripetizione.</span>
+                }
+            </div>
+            }
 
-      <!-- WEIGHT -->
-      <label for="weightKg">Peso (kg):</label>
-      <input
-        type="number"
-        id="weightKg"
-        name="weightKg"
-        [(ngModel)]="exercise.weightKg"
-        min="0"
-        #weightRef="ngModel"
-      />
-      <div class="error" *ngIf="weightRef.invalid && weightRef.touched">
-        <span *ngIf="weightRef.errors?.['min']">Il peso non può essere negativo.</span>
-      </div>
+            <!-- WEIGHT -->
+            <label for="weightKg">Peso (kg):</label>
+            <input type="number" id="weightKg" name="weightKg" [(ngModel)]="exercise.weightKg" min="0"
+                #weightRef="ngModel" />
+            @if (weightRef.invalid && weightRef.touched) {
+            <div class="error">
+                @if (weightRef.errors?.['min']) {
+                <span>Il peso non può essere negativo.</span>
+                }
+            </div>
+            }
 
-      <!-- NOTES -->
-      <label for="notes">Note:</label>
-      <textarea
-        id="notes"
-        name="notes"
-        [(ngModel)]="exercise.notes"
-        minlength="0"
-        maxlength="200"
-        #notesRef="ngModel"
-      ></textarea>
-      <div class="error" *ngIf="notesRef.invalid && notesRef.touched">
-        <span *ngIf="notesRef.errors?.['maxlength']">Max 200 caratteri.</span>
-      </div>
+            <!-- NOTES -->
+            <label for="notes">Note:</label>
+            <textarea id="notes" name="notes" [(ngModel)]="exercise.notes" minlength="0" maxlength="200"
+                #notesRef="ngModel"></textarea>
+            @if (notesRef.invalid && notesRef.touched) {
+            <div class="error">
+                @if (notesRef.errors?.['maxlength']) {
+                <span>Max 200 caratteri.</span>
+                }
+            </div>
+            }
 
-      <!-- SUBMIT BUTTON -->
-      <button type="submit" [disabled]="exerciseForm.invalid">
-        {{ isEditMode ? 'Salva Modifiche' : 'Aggiungi Esercizio' }}
-      </button>
+            <!-- SUBMIT BUTTON -->
+            <button type="submit" [disabled]="exerciseForm.invalid">
+                @if (isEditMode) { Salva Modifiche } @else { Aggiungi Esercizio }
+            </button>
 
-    </form>
-  </div>
+        </form>
+    </div>
 </div>

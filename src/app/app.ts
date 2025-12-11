@@ -3,20 +3,21 @@ import { RouterOutlet } from '@angular/router';
 import { Exercise } from './models/exercise';
 import { Modal } from './components/modal/modal';
 import { ExerciseService } from './service/exercise-service';
-
+import { Exercise as ex } from './components/exercise/exercise';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Modal],
+  standalone: true,
+  imports: [RouterOutlet, Modal, ex],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('gym-app');
+  exerciseService = inject(ExerciseService);
+
   isEditMode = false;
   showModal = false;
   selectedExercise!: Exercise;
-  exerciseService = inject(ExerciseService);
 
   exercises: Exercise[] = [];
 
@@ -33,21 +34,35 @@ export class App {
       weightKg: 0,
       notes: '',
     };
-    this.showModal = true;
     this.isEditMode = false;
-    
+    this.showModal = true;
   }
 
-  editExercise(id: number) {
-    console.log('Modifica esercizio con id:', id);
-    alert(`Funzione MODIFICA per esercizio ID ${id} - Da implementare! ✏️`);
+  async addExercise(data: Omit<Exercise, 'id'>) {
+    const created = await this.exerciseService.addExercise(data);
+    this.exercises.push(created);
+    this.showModal = false;
   }
 
-  deleteExercise(id: string) {
-    console.log('Elimina esercizio con id:', id);
-    const confirmed = confirm(`Sei sicuro di voler eliminare questo esercizio? 🗑️`);
-    if (confirmed) {
-      alert('Esercizio eliminato! ✅');
-    }
+  editExercise(id: string) {
+    this.selectedExercise = structuredClone(this.exercises.find((ex) => ex.id === id)!);
+    this.isEditMode = true;
+    this.showModal = true;
+  }
+
+  async updateExercise(updated: Exercise) {
+    const saved = await this.exerciseService.updateExercise(updated);
+
+    const index = this.exercises.findIndex((ex) => ex.id === saved.id);
+    this.exercises[index] = saved;
+
+    this.showModal = false;
+  }
+  async deleteExercise(id: string) {
+    const confirmed = confirm('Sei sicuro?');
+    if (!confirmed) return;
+
+    await this.exerciseService.deleteExercise(id);
+    this.exercises = this.exercises.filter((ex) => ex.id !== id);
   }
 }
