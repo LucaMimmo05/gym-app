@@ -21,9 +21,11 @@ export class App {
   selectedExercise!: Exercise;
 
   exercises: Exercise[] = [];
+  allExercises: Exercise[] = [];
 
   async ngOnInit() {
     this.exercises = await this.exerciseService.getExercises();
+    this.allExercises = [...this.exercises];
   }
 
   insertExercise() {
@@ -68,24 +70,13 @@ export class App {
   }
 
   onOptionSelected(option: string) {
-    switch(option) {
-        case 'petto':
-            this.exercises = this.exercises.filter(ex => ex.muscleGroup.toLocaleLowerCase() === 'petto');
-            break;
-        case 'spalle':
-            this.exercises = this.exercises.filter(ex => ex.muscleGroup.toLocaleLowerCase() === 'spalle');
-            break;
-        case 'gambe':
-            this.exercises = this.exercises.filter(ex => ex.muscleGroup.toLocaleLowerCase() === 'gambe');
-            break;
-        case 'braccia':
-            this.exercises = this.exercises.filter(ex => ex.muscleGroup.toLocaleLowerCase() === 'braccia');
-            break;
-        case 'core':
-            this.exercises = this.exercises.filter(ex => ex.muscleGroup.toLocaleLowerCase() === 'core');
-            break;
-        default:
-            this.ngOnInit();
+    const selected = option.toLowerCase();
+
+    if (selected === 'tutti') {
+      this.exercises = structuredClone(this.allExercises);
+      return;
     }
+
+    this.exercises = this.allExercises.filter((ex) => ex.muscleGroup.toLowerCase() === selected);
   }
 }

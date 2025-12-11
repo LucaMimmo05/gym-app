@@ -4,12 +4,12 @@
         <p class="subtitle">🏋️ Il tuo programma di allenamento personale</p>
 
         <div class="filter-section">
-            <app-dropdown label="Filtra per" [options]="['petto', 'spalle', 'gambe', 'braccia', 'core']"
+            <app-dropdown label="Filtra per" [options]="['Tutti', 'Petto', 'Spalle', 'Gambe', 'Braccia', 'Core']"
                 (selectionChange)="onOptionSelected($event)">
             </app-dropdown>
             <div class="button-container">
                 <button class="btn-insert" (click)="insertExercise()">
-                    + 
+                    +
                 </button>
             </div>
         </div>

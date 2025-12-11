@@ -1,13 +1,33 @@
 <div class="exercise-card">
-    <h2>{{ exercise.name }}</h2>
-    <p><strong>Gruppo muscolare:</strong> {{ exercise.muscleGroup }}</p>
-    <p><strong>Serie:</strong> {{ exercise.sets }} | <strong>Ripetizioni:</strong> {{ exercise.reps }}</p>
-    @if (exercise.weightKg) {
-    <p><strong>Peso:</strong> {{ exercise.weightKg }} kg</p>
-    }
+    <div class="card-header">
+        <h2>{{ exercise.name }}</h2>
+        <span class="muscle-badge">{{ exercise.muscleGroup }}</span>
+    </div>
+
+    <div class="card-info-grid">
+        <div class="info-item">
+            <div class="info-label">Serie</div>
+            <div class="info-value">{{ exercise.sets }}</div>
+        </div>
+        <div class="info-item">
+            <div class="info-label">Ripetizioni</div>
+            <div class="info-value">{{ exercise.reps }}</div>
+        </div>
+        @if (exercise.weightKg) {
+        <div class="info-item">
+            <div class="info-label">Peso</div>
+            <div class="info-value accent">{{ exercise.weightKg }} kg</div>
+        </div>
+        }
+    </div>
+
     @if (exercise.notes) {
-    <p><strong>Note:</strong> {{ exercise.notes }}</p>
+    <div class="notes-section">
+        <div class="notes-label">Note</div>
+        <div class="notes-text">{{ exercise.notes }}</div>
+    </div>
     }
+
     <div class="button-group">
         <button class="btn-edit" (click)="editExercise.emit(exercise?.id)">
             ✏️ Modifica
