@@ -1,6 +1,12 @@
 <div class="modal">
     <div class="modal-content">
-        <span class="close" (click)="closeModal()">&times;</span>
+        <span class="close" (click)="closeModal()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </span>
 
         <h2>@if (isEditMode) { Modifica Esercizio } @else { Inserisci Nuovo Esercizio }</h2>
 
@@ -26,8 +32,13 @@
             <!-- MUSCLE GROUP -->
             <div class="form-group">
                 <label for="muscleGroup">Gruppo Muscolare:*</label>
-                <input type="text" id="muscleGroup" name="muscleGroup" [(ngModel)]="exercise.muscleGroup" required
-                    minlength="2" #muscleRef="ngModel" />
+                <select id="muscleGroup" name="muscleGroup" [(ngModel)]="exercise.muscleGroup" required
+                    #muscleRef="ngModel">
+                    <option value="" disabled>Seleziona un gruppo muscolare</option>
+                    @for (group of muscleGroups; track group) {
+                    <option [value]="group">{{ group | titlecase }}</option>
+                    }
+                </select>
                 @if (muscleRef.invalid && muscleRef.touched) {
                 <div class="error">
                     @if (muscleRef.errors?.['required']) {

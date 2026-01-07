@@ -131,7 +131,8 @@ label {
 
 /* Input e textarea */
 input,
-textarea {
+textarea,
+select {
   width: 100%;
   padding: 14px 16px;
   border-radius: 10px;
@@ -149,15 +150,24 @@ textarea::placeholder {
 }
 
 input:hover,
-textarea:hover {
+textarea:hover,
+select:hover {
   background: rgba(255, 255, 255, 0.06);
 }
 
 input:focus,
-textarea:focus {
+textarea:focus,
+select:focus {
   border-color: #5a9a96;
   background: rgba(90, 154, 150, 0.08);
   outline: none;
+}
+
+/* Opzioni della select */
+select option {
+  background-color: #1a1a22;
+  color: #e8e8e8;
+  padding: 10px;
 }
 
 textarea {
@@ -193,7 +203,8 @@ button[type='submit']:active {
 
 /* Input invalidi */
 input.ng-invalid.ng-touched,
-textarea.ng-invalid.ng-touched {
+textarea.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
   border-color: #a05050;
   background: rgba(160, 80, 80, 0.08);
 }

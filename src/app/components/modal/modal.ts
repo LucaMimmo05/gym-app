@@ -1,17 +1,19 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { Exercise } from '../../models/exercise';
+import { Exercise, MUSCLE_GROUPS } from '../../models/exercise';
 import { FormsModule } from '@angular/forms';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   standalone: true,
   selector: 'app-modal',
-  imports: [FormsModule],
+  imports: [FormsModule, TitleCasePipe],
   templateUrl: './modal.html',
   styleUrl: './modal.css',
 })
 export class Modal {
   @Input() exercise!: Exercise;
   @Input() isEditMode: boolean = false;
+  muscleGroups = MUSCLE_GROUPS;
   @Output() close = new EventEmitter<void>();
   @Output() submitExercise = new EventEmitter<Exercise>();
   closeModal() {

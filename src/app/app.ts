@@ -31,7 +31,7 @@ export class App {
   insertExercise() {
     this.selectedExercise = {
       name: '',
-      muscleGroup: '',
+      muscleGroup: '' as any,
       sets: 0,
       reps: 0,
       weightKg: 0,
